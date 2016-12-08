@@ -1,8 +1,7 @@
-#Inlämningsuppgift: Veckodag
 #Raymond Wang
-#Mata in år, månad och dag i fälten 'Year', 'Month', respektive 'Day'
-#Månad matas in som en siffra 1-12
-#Klicka sedan på knappen 'Calculate' för att returnera veckodagen för datument
+#Input in the entry boxes of 'Year', 'Month', respektive 'Day'
+#Month must be written as a number between 1-12
+#Press "Calculate" button to return weekday of the given date
 
 from tkinter import *
 
