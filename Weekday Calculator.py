@@ -90,7 +90,6 @@ def wordmonth(month):
     month = int(Monthdisplay.get())
     return monthname[month]
 
-    
 #Title
 Title = Label(root, text= "Weekday Calculator", font = ('Avenir', 18, 'normal'))
 Title.grid(column = 0, columnspan = 7, padx = 5, pady = 5)
