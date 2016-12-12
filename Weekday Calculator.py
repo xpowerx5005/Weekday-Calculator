@@ -81,11 +81,8 @@ def calculate(year, month, day):
     y = int(year) - a
     m = int(month) + (12*a) -2
 
-    d = (int(day) + y + int(y/4) - int(y/100) + int(y/400) + int((31*m)/12)) % 7
-    
-    
+    d = (int(day) + y + int(y/4) - int(y/100) + int(y/400) + int((31*m)/12)) % 7    
     return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a ' + weekday[d])
-
 
 def wordmonth(month):
     monthname = ['January', 'February', 'March', 'April', 'May', 'June', 'Saturday',
