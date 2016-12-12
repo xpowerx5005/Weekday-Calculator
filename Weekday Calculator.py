@@ -18,132 +18,80 @@ def clear():
     
 #Convert command
 def convert():
-    try:
-        year = int(Yeardisplay.get())
-        month = int(Monthdisplay.get())
-        day = int(Daydisplay.get())
-        if month == 2:
-            if (((year % 4) == 0 and not (year % 100) == 0) or (year % 400) == 0):
-                if day <= 29:
-                    Weekdaydisplay.delete(0,END)
-                    Weekdaydisplay.insert(INSERT,calculate(year, month, day))
+    year = (Yeardisplay.get())
+    month = (Monthdisplay.get())
+    day = (Daydisplay.get())
+    if  True in [f == '0' or f == '1' or f == '2' or f == '3'
+    or f == '4' or f == '5' or f == '6' or f == '7'
+    or f == '8' or f == '9' for f in year and month and day]:
+        if int(month) <= 12:
+            if int(month) == 2:
+                if (((int(year) % 4) == 0 and not (int(year) % 100) == 0) or (int(year) % 400) == 0):
+                    if int(day) <= 29:
+                        change_display(calculate(year, month, day))
+                    else:
+                        error_display('Error') 
                 else:
-                    Yeardisplay.delete(0,END)
-                    Yeardisplay.insert(INSERT,'Error')
-                    Monthdisplay.delete(0, END)
-                    Monthdisplay.insert(INSERT,'Error')
-                    Daydisplay.delete(0,END)
-                    Daydisplay.insert(INSERT,'Error')
-                    Weekdaydisplay.delete(0,END)
-                    Weekdaydisplay.insert(INSERT,'Error')
-            else:
-                if day <= 28:
-                    Weekdaydisplay.delete(0,END)
-                    Weekdaydisplay.insert(INSERT,calculate(year, month, day))
+                    if int(day) <= 28:
+                        change_display(calculate(year, month, day))
+                    else:
+                        error_display('Error') 
+            elif (int(month) == 1 or int(month) == 3 or int(month) == 5 or int(month) == 7
+                  or int(month) == 8 or int(month) == 10 or int(month) == 12):
+                if int(day) <= 31:
+                    change_display(calculate(year, month, day))
                 else:
-                    Yeardisplay.delete(0,END)
-                    Yeardisplay.insert(INSERT,'Error')
-                    Monthdisplay.delete(0, END)
-                    Monthdisplay.insert(INSERT,'Error')
-                    Daydisplay.delete(0,END)
-                    Daydisplay.insert(INSERT,'Error')
-                    Weekdaydisplay.delete(0,END)
-                    Weekdaydisplay.insert(INSERT,'Error')
-                    
-        elif month == 1 or month == 3 or month == 5 or month == 7 or month == 8 or month == 10 or month == 12:
-            if day <= 31:
-                Weekdaydisplay.delete(0,END)
-                Weekdaydisplay.insert(INSERT,calculate(year, month, day))
-            else:
-                Yeardisplay.delete(0,END)
-                Yeardisplay.insert(INSERT,'Error')
-                Monthdisplay.delete(0, END)
-                Monthdisplay.insert(INSERT,'Error')
-                Daydisplay.delete(0,END)
-                Daydisplay.insert(INSERT,'Error')
-                Weekdaydisplay.delete(0,END)
-                Weekdaydisplay.insert(INSERT,'Error')
-                    
-        elif month == 4 or month == 6 or month == 9 or month == 11:
-            if day <= 30:
-                Weekdaydisplay.delete(0,END)
-                Weekdaydisplay.insert(INSERT,calculate(year, month, day))
-            else:
-                Yeardisplay.delete(0,END)
-                Yeardisplay.insert(INSERT,'Error')
-                Monthdisplay.delete(0, END)
-                Monthdisplay.insert(INSERT,'Error')
-                Daydisplay.delete(0,END)
-                Daydisplay.insert(INSERT,'Error')
-                Weekdaydisplay.delete(0,END)
-                Weekdaydisplay.insert(INSERT,'Error')
+                    error_display('Error') 
+            elif int(month) == 4 or int(month) == 6 or int(month) == 9 or int(month) == 11:
+                if int(day) <= 31:
+                    change_display(calculate(year, month, day))
+                else:
+                    error_display('Error') 
         else:
-            Yeardisplay.delete(0,END)
-            Yeardisplay.insert(INSERT,'Error')
-            Monthdisplay.delete(0, END)
-            Monthdisplay.insert(INSERT,'Error')
-            Daydisplay.delete(0,END)
-            Daydisplay.insert(INSERT,'Error')
-            Weekdaydisplay.delete(0,END)
-            Weekdaydisplay.insert(INSERT,'Error')
+            error_display('Error')             
+    else:
+        if year == '':
+            if month == '':               
+                if day == '':
+                    error_display('')                     
+                else:
+                    error_display('Error')              
+            else:
+                error_display('Error')
+        else:
+            error_display('Error')
             
-    except ValueError:
-        Yeardisplay.delete(0,END)
-        Yeardisplay.insert(INSERT,'Error')
-        Monthdisplay.delete(0, END)
-        Monthdisplay.insert(INSERT,'Error')
-        Daydisplay.delete(0,END)
-        Daydisplay.insert(INSERT,'Error')
-        Weekdaydisplay.delete(0,END)
-        Weekdaydisplay.insert(INSERT,'Error')
+def change_display(s):
+    Weekdaydisplay.delete(0,END)
+    Weekdaydisplay.insert(INSERT,s)
+    
+def error_display(s):
+    Yeardisplay.delete(0,END)
+    Yeardisplay.insert(INSERT,s)
+    Monthdisplay.delete(0, END)
+    Monthdisplay.insert(INSERT,s)
+    Daydisplay.delete(0,END)
+    Daydisplay.insert(INSERT,s)
+    Weekdaydisplay.delete(0,END)
+    Weekdaydisplay.insert(INSERT,s)
+    
+def calculate(year, month, day):
+    weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+    a = int((14 - int(month))/12)
+    y = int(year) - a
+    m = int(month) + (12*a) -2
 
-def calculate(year, month, day): 
-    a = int((14 - month)/12)
-    y = year - a
-    m = month + (12*a) - 2
+    d = (int(day) + y + int(y/4) - int(y/100) + int(y/400) + int((31*m)/12)) % 7
+    
+    
+    return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a ' + weekday[d])
 
-    d = (day + y + int(y/4) - int(y/100) + int(y/400) + int((31*m)/12)) % 7    
-        
-    if d == 0:
-        return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a Sunday')
-    elif d == 1:
-        return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a Monday')
-    elif d == 2:
-        return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a Tuesday')
-    elif d == 3:
-        return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a Wednesday')
-    elif d == 4:
-        return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a Thursday')
-    elif d == 5:
-        return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a Friday')
-    elif d == 6:
-        return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a Saturday')
 
 def wordmonth(month):
-    if month == 1:
-        return 'January'
-    elif month == 2:
-        return 'February'
-    elif month == 3:
-        return 'March'
-    elif month == 4:
-        return 'April'
-    elif month == 5:
-        return 'May'
-    elif month == 6:
-        return 'June'
-    elif month == 7:
-        return 'July'
-    elif month == 8:
-        return 'August'
-    elif month == 9:
-        return 'September'
-    elif month == 10:
-        return 'October'
-    elif month == 11:
-        return 'November'
-    elif month == 12:
-        return 'December'
+    monthname = ['January', 'February', 'March', 'April', 'May', 'June', 'Saturday',
+              'July', 'August', 'September', 'October', 'November', 'December']
+    month = int(Monthdisplay.get())
+    return monthname[month]
 
     
 #Title
