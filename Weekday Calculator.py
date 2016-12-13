@@ -43,7 +43,7 @@ def convert():
                 else:
                     error_display('Error') 
             elif int(month) == 4 or int(month) == 6 or int(month) == 9 or int(month) == 11:
-                if int(day) <= 31:
+                if int(day) <= 30:
                     change_display(calculate(year, month, day))
                 else:
                     error_display('Error') 
