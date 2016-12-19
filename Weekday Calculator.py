@@ -2,6 +2,7 @@
 #Month must be written as a number between 1-12
 #Press "Calculate" button to return weekday of the given date
 
+import time
 from tkinter import *
 
 root = Tk()
@@ -28,62 +29,95 @@ def convert():
             if int(month) == 2:
                 if (((int(year) % 4) == 0 and not (int(year) % 100) == 0) or (int(year) % 400) == 0):
                     if int(day) <= 29:
-                        change_display(calculate(year, month, day))
+                        change_display()
                     else:
-                        error_display('Error') 
+                        error_display() 
                 else:
                     if int(day) <= 28:
-                        change_display(calculate(year, month, day))
+                        change_display()
                     else:
-                        error_display('Error') 
+                        error_display() 
             elif (int(month) == 1 or int(month) == 3 or int(month) == 5 or int(month) == 7
                   or int(month) == 8 or int(month) == 10 or int(month) == 12):
                 if int(day) <= 31:
-                    change_display(calculate(year, month, day))
+                    change_display()
                 else:
-                    error_display('Error') 
+                    error_display() 
             elif int(month) == 4 or int(month) == 6 or int(month) == 9 or int(month) == 11:
                 if int(day) <= 30:
-                    change_display(calculate(year, month, day))
+                    change_display()
                 else:
-                    error_display('Error') 
+                    error_display() 
         else:
-            error_display('Error')             
+            error_display()             
     else:
         if year == '':
             if month == '':               
                 if day == '':
-                    error_display('')                     
+                    error_blank_display()                     
                 else:
-                    error_display('Error')              
+                    error_display()              
             else:
-                error_display('Error')
+                error_display()
         else:
-            error_display('Error')
+            error_display()
             
-def change_display(s):
+def change_display():
     Weekdaydisplay.delete(0,END)
-    Weekdaydisplay.insert(INSERT,s)
+    Weekdaydisplay.insert(INSERT, calculate())
     
-def error_display(s):
+def error_display():
     Yeardisplay.delete(0,END)
-    Yeardisplay.insert(INSERT,s)
+    Yeardisplay.insert(INSERT, 'Error')
     Monthdisplay.delete(0, END)
-    Monthdisplay.insert(INSERT,s)
+    Monthdisplay.insert(INSERT, 'Error')
     Daydisplay.delete(0,END)
-    Daydisplay.insert(INSERT,s)
-    Weekdaydisplay.delete(0,END)
-    Weekdaydisplay.insert(INSERT,s)
-    
-def calculate(year, month, day):
+    Daydisplay.insert(INSERT, 'Error')
+    Weekdaydisplay.delete(0, END)
+    Weekdaydisplay.insert(INSERT, 'Error')
+
+def error_blank_display():
+    Yeardisplay.delete(0,END)
+    Yeardisplay.insert(INSERT, '')
+    Monthdisplay.delete(0, END)
+    Monthdisplay.insert(INSERT, '')
+    Daydisplay.delete(0,END)
+    Daydisplay.insert(INSERT, '')
+    Weekdaydisplay.delete(0, END)
+    Weekdaydisplay.insert(INSERT, '')
+       
+def calculate():
+    year = Yeardisplay.get()
+    month = Monthdisplay.get()
+    day = Daydisplay.get()
+    if int(year) == int(time.strftime("%Y")):
+        if int(month) == int(time.strftime("%m")):
+            if int(day) == int(time.strftime("%d")):
+                return message(' is a ')
+            elif int(day) < int(time.strftime("%d")):
+                return message(' was a ')
+            elif int(day) > int(time.strftime("%d")):
+                return message(' will be a ')
+        elif int(month) < int(time.strftime("%m")):
+            return message(' was a ')
+        elif int(month) > int(time.strftime("%m")):
+            return message(' will be a ')
+    elif int(year) < int(time.strftime("%Y")):
+        return message(' was a ')
+    elif int(year) > int(time.strftime("%Y")):
+        return message(' will be a ')
+
+def message(s):
+    year = Yeardisplay.get()
+    month = Monthdisplay.get()
+    day = Daydisplay.get()
     weekday = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
     a = int((14 - int(month))/12)
     y = int(year) - a
     m = int(month) + (12*a) -2
-
-    d = (int(day) + y + int(y/4) - int(y/100) + int(y/400) + int((31*m)/12)) % 7    
-    return (wordmonth(month) + ' ' + str(day) + ' , ' + str(year) + ' is a ' + weekday[d])
-
+    d = (int(day) + y + int(y/4) - int(y/100) + int(y/400) + int((31*m)/12)) % 7
+    return (wordmonth(month) + ' ' + day + ' , ' + year + s + weekday[d])
+    
 def wordmonth(month):
     monthname = ['January', 'February', 'March', 'April', 'May', 'June', 'Saturday',
               'July', 'August', 'September', 'October', 'November', 'December']
