@@ -119,9 +119,9 @@ def message(s):
     return (wordmonth(month) + ' ' + day + ' , ' + year + s + weekday[d])
     
 def wordmonth(month):
-    monthname = ['January', 'February', 'March', 'April', 'May', 'June', 'Saturday',
+    monthname = ['January', 'February', 'March', 'April', 'May', 'June',
               'July', 'August', 'September', 'October', 'November', 'December']
-    month = int(Monthdisplay.get())
+    month = int(Monthdisplay.get()) -1
     return monthname[month]
 
 #Title
