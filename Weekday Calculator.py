@@ -1,6 +1,7 @@
 #Input in the entry boxes of 'Year', 'Month' and 'Day'
 #Month must be written as a number between 1-12
 #Press "Calculate" button to return weekday of the given date
+#The calculator also tells whether the given date is today, tomorrow or yesterday
 
 import time
 from datetime import date, timedelta
@@ -107,7 +108,7 @@ def calculate():
                 return message1(' Yesterday was a ')
             
             elif int(day) < int(time.strftime('%d')):
-                return message(' was a a ')
+                return message(' was a ')
             elif int(day) > int(time.strftime('%d')):
                 return message(' will be a ')
             
@@ -122,7 +123,7 @@ def calculate():
                         else:
                             return message(' will be a ')
                     else:
-                        return message(' was a a ')
+                        return message(' was a ')
                 elif (int(time.strftime("%m")) == 4 or int(time.strftime("%m")) == 6
                 or int(time.strftime("%m")) == 9 or int(time.strftime("%m")) == 11):
                     if int(time.strftime("%d")) == 30:
@@ -141,7 +142,7 @@ def calculate():
                             else:
                                 return message(' will be a ')
                         else:
-                            return message(' was a a ')
+                            return message(' was a ')
                     else:
                         if int(time.strftime("%d")) == 28:
                             if int(day) == 1:
