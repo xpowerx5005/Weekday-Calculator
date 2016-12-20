@@ -40,16 +40,14 @@ def convert():
                         change_display()
                     else:
                         error_display() 
-            elif (int(month) == 1 or int(month) == 3
-            or int(month) == 5 or int(month) == 7
-            or int(month) == 8 or int(month) == 10
-            or int(month) == 12):
+            elif (int(month) == 1 or int(month) == 3 or int(month) == 5 or int(month) == 7
+            or int(month) == 8 or int(month) == 10 or int(month) == 12):
                 if int(day) <= 31:
                     change_display()
                 else:
                     error_display() 
-            elif int(month) == 4 or int(month) == 6
-            or int(month) == 9 or int(month) == 11:
+            elif (int(month) == 4 or int(month) == 6
+            or int(month) == 9 or int(month) == 11):
                 if int(day) <= 30:
                     change_display()
                 else:
