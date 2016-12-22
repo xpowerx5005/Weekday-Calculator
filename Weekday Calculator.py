@@ -1,7 +1,6 @@
 #Input in the entry boxes of 'Year', 'Month' and 'Day'
 #Month must be written as a number between 1-12
 #Press "Calculate" button to return weekday of the given date
-#The calculator also tells whether the given date is today, tomorrow or yesterday
 
 import time
 from datetime import date, timedelta
@@ -35,7 +34,7 @@ def convert():
                     if int(day) <= 29:
                         change_display()
                     else:
-                        error_display() 
+                        error_display('Error') 
                 else:
                     if int(day) <= 28:
                         change_display()
@@ -52,45 +51,35 @@ def convert():
                 if int(day) <= 30:
                     change_display()
                 else:
-                    error_display() 
+                    error_display('Error') 
         else:
-            error_display()             
+            error_display('Error')             
     else:
         if year == '':
             if month == '':               
                 if day == '':
-                    error_blank_display()                     
+                    error_display('')                     
                 else:
-                    error_display()              
+                    error_display('Error')              
             else:
-                error_display()       
+                error_display('Error')       
         else:
-            error_display()
+            error_display('Error')
             
 def change_display():
     Weekdaydisplay.delete(0,END)
     Weekdaydisplay.insert(INSERT, calculate())
     
-def error_display():
+def error_display(s):
     Yeardisplay.delete(0,END)
-    Yeardisplay.insert(INSERT, 'Error')
+    Yeardisplay.insert(INSERT, s)
     Monthdisplay.delete(0, END)
-    Monthdisplay.insert(INSERT, 'Error')
+    Monthdisplay.insert(INSERT, s)
     Daydisplay.delete(0,END)
-    Daydisplay.insert(INSERT, 'Error')
+    Daydisplay.insert(INSERT, s)
     Weekdaydisplay.delete(0, END)
-    Weekdaydisplay.insert(INSERT, 'Error')
+    Weekdaydisplay.insert(INSERT, s)
 
-def error_blank_display():
-    Yeardisplay.delete(0,END)
-    Yeardisplay.insert(INSERT, '')
-    Monthdisplay.delete(0, END)
-    Monthdisplay.insert(INSERT, '')
-    Daydisplay.delete(0,END)
-    Daydisplay.insert(INSERT, '')
-    Weekdaydisplay.delete(0, END)
-    Weekdaydisplay.insert(INSERT, '')
-       
 def calculate():
     year = Yeardisplay.get()
     month = Monthdisplay.get()
