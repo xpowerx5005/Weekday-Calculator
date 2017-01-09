@@ -40,14 +40,12 @@ def convert():
                         change_display()
                     else:
                         error_display() 
-            elif (int(month) == 1 or int(month) == 3 or int(month) == 5 or int(month) == 7
-            or int(month) == 8 or int(month) == 10 or int(month) == 12):
+            if (int(month) in [1,3,5,7,8,10,12]):
                 if int(day) <= 31:
                     change_display()
                 else:
                     error_display() 
-            elif (int(month) == 4 or int(month) == 6
-            or int(month) == 9 or int(month) == 11):
+            elif (int(month) in [4,6,9,11]):
                 if int(day) <= 30:
                     change_display()
                 else:
@@ -103,9 +101,7 @@ def calculate():
             
         elif int(month) > int(time.strftime("%m")):
             if int(month) == int(time.strftime("%m")) + 1:
-                if (int(time.strftime("%m")) == 1 or int(time.strftime("%m")) == 3
-                or int(time.strftime("%m")) == 5 or int(time.strftime("%m")) == 7
-                or int(time.strftime("%m")) == 8 or int(time.strftime("%m")) == 10):
+                if (int(time.strftime("%m")) in [1,3,5,7,8,10]):
                     if int(time.strftime("%d")) == 31:
                         if int(day) == 1:
                             return message1(' Tomorrow will be a ')
@@ -113,8 +109,7 @@ def calculate():
                             return message(' will be a ')
                     else:
                         return message(' was a ')
-                elif (int(time.strftime("%m")) == 4 or int(time.strftime("%m")) == 6
-                or int(time.strftime("%m")) == 9 or int(time.strftime("%m")) == 11):
+                elif (int(time.strftime("%m")) in [4,6,9,11]):
                     if int(time.strftime("%d")) == 30:
                         if int(day) == 1:
                             return message1(' Tomorrow will be a ')
@@ -145,15 +140,12 @@ def calculate():
                 
         elif int(month) < int(time.strftime("%m")):
             if int(time.strftime("%d")) == 1:
-                if (int(month) == 1 or int(month) == 3
-                or int(month) == 5 or int(month) == 7
-                or int(month) == 8 or int(month) == 10):
+                if (int(month) in [1,3,5,7,8,10]):
                     if int(day) == 31:
                         return message1(' Yesterday was a ')
                     else:
                         return message(' was a ')
-                elif (int(month) == 4 or int(month == 6
-                or int(month) == 9 or int(month) == 11)):
+                elif (int(month) in [4,6,9,11]):
                     if int(day) == 30:
                         return message1(' Yesterday was a ')
                     else:
