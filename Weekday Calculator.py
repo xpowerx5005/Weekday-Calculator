@@ -22,9 +22,7 @@ def convert():
     year = (Yeardisplay.get())
     month = (Monthdisplay.get())
     day = (Daydisplay.get())
-    if  True in [f == '1' or f == '2' or f == '3'
-    or f == '4' or f == '5' or f == '6' or f == '7'
-    or f == '8' or f == '9' for f in year and month and day]:
+    if year.isdigit and month.isdigit and day.isdigit: 
         if int(month) <= 12:
             if int(month) == 2:
                 if (((int(year) % 4) == 0 and
