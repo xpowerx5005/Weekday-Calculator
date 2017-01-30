@@ -22,45 +22,52 @@ def convert():
     year = (Yeardisplay.get())
     month = (Monthdisplay.get())
     day = (Daydisplay.get())
-    if year.isdigit and month.isdigit and day.isdigit: 
-        if int(month) <= 12:
-            if int(month) == 2:
-                if (((int(year) % 4) == 0 and
-                not (int(year) % 100) == 0)
-                or (int(year) % 400) == 0):
-                    if int(day) <= 29:
-                        change_display()
-                    else:
-                        error_display('Error') 
+    try: 
+        if year.isdigit and month.isdigit and day.isdigit:
+            if int(year) and int(month) and int(day) > 0:    
+                if int(month) <= 12:
+                    if int(month) == 2:
+                        if (((int(year) % 4) == 0 and
+                        not (int(year) % 100) == 0)
+                        or (int(year) % 400) == 0):
+                            if int(day) <= 29:
+                                change_display()
+                            else:
+                                error_display('Error') 
+                        else:
+                            if int(day) <= 28:
+                                change_display()
+                            else:
+                                error_display() 
+                    if (int(month) in [1,3,5,7,8,10,12]):
+                        if int(day) <= 31:
+                            change_display()
+                        else:
+                            error_display(s) 
+                    elif (int(month) in [4,6,9,11]):
+                        if int(day) <= 30:
+                            change_display()
+                        else:
+                            error_display('Error') 
                 else:
-                    if int(day) <= 28:
-                        change_display()
-                    else:
-                        error_display() 
-            if (int(month) in [1,3,5,7,8,10,12]):
-                if int(day) <= 31:
-                    change_display()
-                else:
-                    error_display(s) 
-            elif (int(month) in [4,6,9,11]):
-                if int(day) <= 30:
-                    change_display()
-                else:
-                    error_display('Error') 
-        else:
-            error_display('Error')             
-    else:
-        if year == '':
-            if month == '':               
-                if day == '':
-                    error_display('')                     
-                else:
-                    error_display('Error')              
+                    error_display('Error')             
             else:
-                error_display('Error')       
+                if year == '':
+                    if month == '':               
+                        if day == '':
+                            error_display('')                     
+                        else:
+                            error_display('Error')              
+                    else:
+                        error_display('Error')       
+                else:
+                    error_display('Error')
         else:
             error_display('Error')
             
+    except ValueError:
+        error_display('Error')
+
 def change_display():
     Weekdaydisplay.delete(0,END)
     Weekdaydisplay.insert(INSERT, message())
