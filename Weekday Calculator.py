@@ -160,7 +160,7 @@ Exit = Button(text = 'Exit', command = root.destroy, font = ('Avenir', 15, 'norm
 Exit.grid(row = 8, column = 0, columnspan = 15, padx = 10, pady = 5, sticky =  N+S+E+W)
 
 #Credits
-Credits = Label(root, text = "Raymond Wang 2016 ®", font = ('Avenir', 15, 'italic'))
+Credits = Label(root, text = "Raymond Wang 2016 - 2017 ®", font = ('Avenir', 15, 'italic'))
 Credits.grid(row = 9, column = 0, columnspan = 7, pady = 5, padx = 5)
 
 root.mainloop()
