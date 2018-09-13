@@ -2,12 +2,12 @@
 #Month must be written as a number between 1-12
 #Press "Calculate" button to return weekday of the given date
 
-import time
+from time import *
 from tkinter import *
 
 root = Tk()
 root.title("Weekday Calculator")
-root.geometry('390x340')
+root.geometry('430x340')
 root.resizable(width = False, height = False)
     
 #Clear command
@@ -73,12 +73,6 @@ def change_display():
     Weekdaydisplay.insert(INSERT, message())
     
 def error_display(s):
-    Yeardisplay.delete(0,END)
-    Yeardisplay.insert(INSERT, s)
-    Monthdisplay.delete(0, END)
-    Monthdisplay.insert(INSERT, s)
-    Daydisplay.delete(0,END)
-    Daydisplay.insert(INSERT, s)
     Weekdaydisplay.delete(0, END)
     Weekdaydisplay.insert(INSERT, s)
 
@@ -92,22 +86,22 @@ def message():
     m = int(month) + (12*a) -2
     d = (int(day) + y + int(y/4) - int(y/100) + int(y/400) + int((31*m)/12)) % 7
     
-    StrYear = int(time.strftime("%Y"))
-    StrMonth = int(time.strftime("%m"))
-    StrDay = int(time.strftime("%d"))
+    StrYear = int(strftime("%Y"))
+    StrMonth = int(strftime("%m"))
+    StrDay = int(strftime("%d"))
     DisplayTime = JulianDN(year, month, day)
     CurrentDate = JulianDN(StrYear, StrMonth, StrDay)
 
     if DisplayTime == CurrentDate:
-        message = (' Today is a ' + weekday[d])
+        message = ('Today is a ' + weekday[d])
     elif DisplayTime == CurrentDate + 1:
-        message = (' Tomorrow will be a ' + weekday[d])
+        message = ('Tomorrow will be a ' + weekday[d])
     elif DisplayTime == CurrentDate - 1:
-        message = (' Yesterday was a ' + weekday[d])
+        message = ('Yesterday was a ' + weekday[d])
     elif DisplayTime > CurrentDate:
-        message = (wordmonth(month) + ' ' + day + ' , ' + year + ' will be a ' + weekday[d])
+        message = (wordmonth(month) + ' ' + day.replace("0", "") + ' , ' + year + ' will be a ' + weekday[d])
     elif DisplayTime < CurrentDate:
-        message = (wordmonth(month) + ' ' + day + ' , ' + year + ' was a ' + weekday[d])
+        message = (wordmonth(month) + ' ' + day.replace("0", "") + ' , ' + year + ' was a ' + weekday[d])
     return message
 
 def JulianDN(Y,M,D):
@@ -165,7 +159,7 @@ Exit = Button(text = 'Exit', command = root.destroy, font = ('Avenir', 15, 'norm
 Exit.grid(row = 8, column = 0, columnspan = 15, padx = 10, pady = 5, sticky =  N+S+E+W)
 
 #Credits
-Credits = Label(root, text = "Raymond Wang 2016 - 2017 ®", font = ('Avenir', 15, 'italic'))
+Credits = Label(root, text = "Raymond Wang 2018 ®", font = ('Avenir', 15, 'italic'))
 Credits.grid(row = 9, column = 0, columnspan = 7, pady = 5, padx = 5)
 
 root.mainloop()
