@@ -169,7 +169,7 @@ def main():
         output = (Month + ' ' + Day + ', ' + Year + text + day_of_week)
         return output
 
-    #Returns ordinal of given day number
+    #Returns ordinal for given day number
     def ordinal(day):
         teen_numbers = [11, 12, 13, 14, 15, 16, 17, 18, 19]
         output = ['th','st', 'nd', 'rd', 'th', 'th',
