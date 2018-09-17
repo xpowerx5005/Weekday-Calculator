@@ -100,115 +100,67 @@ När felaktig inmatning påträffas ska programmet kommentera felets art, dvs en
 
 # Kodskelett
 ```
-#Input in the entry boxes of 'Year', 'Month' and 'Day'
-#Month must be written as a number between 1-12
-#Press "Calculate" button to return weekday of the given date
+#Input in the entry boxes of 'Year', 'Month' and 'Day.'
+#Month must be written as a number between 1-12.
+#Press "Calculate" button to return weekday of given date.
 
+"""Importing necessary modules. """
 from time import*
 from tkinter import*
 
 class Calculator:
-    
+    """Main program. """
     #GUI LAYOUT
-    def __init__(self, master): 
-        self.master = master
-        self.months = ['January', 'january', 'February',
-                       'february', 'March', 'march',
-                       'April', 'april', 'May', 'may',
-                       'June', 'june', 'July','july',
-                       'August', 'august', 'September',
-                       'september','October', 'october',
-                       'November', 'november',
-                       'December', 'december']
-        master.title('Weekday Calculator')
-        master.geometry('410x380')
-        master.resizable(width = False, height = False)
+    def __init__(self, master):
+         """Initializes GUI window and defines its specifications."""
        
         #Title
-        self.Title = Label(root, text= "Weekday Calculator",
-                     font = ('Avenir', 18, 'normal'))
-        self.Title.grid(column = 0, columnspan = 7,
-                        padx = 5, pady = 5)
+        """Title of the program."""
 
         #Description
-        self.Description = Label(root,
-        text= 'This program determines the specific weekday'
-              ' for given dates \n'
-              '| Year (yyyy) | Month (mm) | Day (dd) |',
-        font = ('Avenir', 13, 'normal'))
-        self.Description.grid(row = 1, column = 0,
-                     columnspan = 7, padx = 5, pady = 5)
-
+        """Short description of the program. """
+        Specifications regarding input of values. 
+       
         #Entry Boxes
-        self.Year = Label(root, padx = 9, text = 'Year:',
-                    font = ('Avenir', 13, 'normal'))
-        self.Year.grid(row = 2, sticky = W, padx = 1)
-        self.Yeardisplay = Entry(root, width = 33)
-        self.Yeardisplay.grid(row = 2, column = 1, sticky = E)
-
-        self.Month = Label(root, padx = 9, text = 'Month:',
-                     font = ('Avenir', 13, 'normal'))
-        self.Month.grid(row = 3, sticky = W, padx = 0)
-        self.Monthdisplay = Entry(root, width = 33)
-        self.Monthdisplay.grid(row = 3, column = 1, sticky = E)
-
-        self.Day = Label(root, padx = 9, text = 'Day:',
-                   font = ('Avenir', 13, 'normal'))
-        self.Day.grid(row = 4, sticky = W, padx = 0)
-        self.Daydisplay = Entry(root, width = 33)
-        self.Daydisplay.grid(row = 4, column = 1, sticky = E)
-
-        self.Week = Label(root, padx = 9, text= 'Weekday:',
-                    font = ('Avenir', 13, 'normal'))
-        self.Week.grid(row = 5, sticky = W, padx = 0)
-        self.Weekdaydisplay = Entry(root, width = 33,
-                              state = 'readonly')
-        self.Weekdaydisplay.grid(row = 5, column = 1, sticky = E)
         
-        self.Extradisplay = Entry(root, width = 33,
-                            state = 'readonly')
-        self.Extradisplay.grid(row = 6, column = 1, sticky = E)
-
+          #Year Entry Box
+        """Input for Year of date."
+        
+          #Month Entry Box
+        """Input for day of date."""
+        
+           #Day Entry Box
+        """Input for day of date."""
+        
+           #Weekday Enty Box
+        """Displays given weekday of given date input."""
+        
+           #Extra Entry Box
+        """Displays error input as well as  additional information"""
+        
+        #Buttons 
+        
         #Calculate Button
-        self.Calculate = Button(text = 'Calculate',
-                         command = self.calculate, 
-                         font = ('Avenir', 15, 'normal'))
-        self.Calculate.grid(row = 7, column = 0, columnspan = 8,
-                         padx = 10, pady = 5, sticky =  N+S+E+W)
-
+        """Executes main algorithm"""
+        
         #Clear Button
-        self.clear = Button(text = 'Clear',
-                     command = self.clear,
-                     font = ('Avenir', 15, 'normal'))
-        self.clear.grid(row = 8, column = 0, columnspan = 8,
-                     padx = 10, pady = 5, sticky =  N+S+E+W)
-
+        """Clears all input boxes"""
+        
         #Exit Button
-        self.Exit = Button(text = 'Exit',
-                    command = root.destroy,
-                    font = ('Avenir', 15, 'normal'))
-        self.Exit.grid(row = 9, column = 0, columnspan = 8,
-                    padx = 10, pady = 5, sticky =  N+S+E+W)
+        """Terminates execution of the program"""
 
         #Credits
-        self.Credits = Label(root, text = 'Raymond Wang 2018 ®',
-                       font = ('Avenir', 15, 'italic'))
-        self.Credits.grid(row = 10, column = 0,
-                       columnspan = 8, pady = 5, padx = 5)
+        """Credits and additional informations"""
 
     #FUNCTIONS
     #Clear command
     def clear(self):
-        self.Yeardisplay.delete(0,END)
-        self.Monthdisplay.delete(0,END)
-        self.Daydisplay.delete(0,END)
-        self.clear_display(self.Weekdaydisplay)
-        self.clear_display(self.Extradisplay)
-        self.Weekdaydisplay.configure(state='readonly')
-        self.Extradisplay.configure(state='readonly')
+    """Command of  Clear button"""
+    Clears each individual entry boxes. 
             
     #Calculate command
     def calculate(self):
+    """Main"""
         year = self.Yeardisplay.get()
         month = self.Monthdisplay.get()
         day = self.Daydisplay.get()
@@ -401,3 +353,5 @@ class Calculator:
 root = Tk()
 Calculator(root)
 root.mainloop()
+```
+# Programflöde och dataflöde
