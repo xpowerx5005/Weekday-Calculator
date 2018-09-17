@@ -24,65 +24,71 @@ class Calculator:
        
         #Title
         self.Title = Label(root, text= "Weekday Calculator",
-                           font = ('Avenir', 18, 'normal'))
-        self.Title.grid(column = 0, columnspan = 7, padx = 5, pady = 5)
+                     font = ('Avenir', 18, 'normal'))
+        self.Title.grid(column = 0, columnspan = 7,
+                        padx = 5, pady = 5)
 
         #Description
         self.Description = Label(root,
         text= 'This program determines the specific weekday'
-              'for given dates \n|'
-              'Year (yyyy) | Month (mm) | Day (dd) |',
+              'for given dates \n'
+              ' | Year (yyyy) | Month (mm) | Day (dd) |',
         font = ('Avenir', 13, 'normal'))
         self.Description.grid(row = 1, column = 0,
-                              columnspan = 7, padx = 5, pady = 5)
+                     columnspan = 7, padx = 5, pady = 5)
 
         #Entry Boxes
         self.Year = Label(root, padx = 9, text = 'Year:',
-                          font = ('Avenir', 13, 'normal'))
+                    font = ('Avenir', 13, 'normal'))
         self.Year.grid(row = 2, sticky = W, padx = 1)
         self.Yeardisplay = Entry(root, width = 33)
         self.Yeardisplay.grid(row = 2, column = 1, sticky = E)
 
         self.Month = Label(root, padx = 9, text = 'Month:',
-                           font = ('Avenir', 13, 'normal'))
+                     font = ('Avenir', 13, 'normal'))
         self.Month.grid(row = 3, sticky = W, padx = 0)
         self.Monthdisplay = Entry(root, width = 33)
         self.Monthdisplay.grid(row = 3, column = 1, sticky = E)
 
         self.Day = Label(root, padx = 9, text = 'Day:',
-                         font = ('Avenir', 13, 'normal'))
+                   font = ('Avenir', 13, 'normal'))
         self.Day.grid(row = 4, sticky = W, padx = 0)
         self.Daydisplay = Entry(root, width = 33)
         self.Daydisplay.grid(row = 4, column = 1, sticky = E)
 
         self.Week = Label(root, padx = 9, text= 'Weekday:',
-                          font = ('Avenir', 13, 'normal'))
+                    font = ('Avenir', 13, 'normal'))
         self.Week.grid(row = 5, sticky = W, padx = 0)
-        self.Weekdaydisplay = Entry(root, width = 33, state = 'readonly')
+        self.Weekdaydisplay = Entry(root, width = 33,
+                              state = 'readonly')
         self.Weekdaydisplay.grid(row = 5, column = 1, sticky = E)
 
         #Calculate Button
         self.Calculate = Button(text = 'Calculate',
-                        command = self.calculate, font = ('Avenir', 15, 'normal'))
+                         command = self.calculate, 
+                         font = ('Avenir', 15, 'normal'))
         self.Calculate.grid(row = 6, column = 0, columnspan = 8,
-                            padx = 10, pady = 5, sticky =  N+S+E+W)
+                         padx = 10, pady = 5, sticky =  N+S+E+W)
 
         #Clear Button
         self.clear = Button(text = 'Clear',
-                    command = self.clear, font = ('Avenir', 15, 'normal'))
+                     command = self.clear,
+                     font = ('Avenir', 15, 'normal'))
         self.clear.grid(row = 7, column = 0, columnspan = 8,
-                        padx = 10, pady = 5, sticky =  N+S+E+W)
+                    padx = 10, pady = 5, sticky =  N+S+E+W)
 
         #Exit Button
         self.Exit = Button(text = 'Exit',
-                    command = root.destroy, font = ('Avenir', 15, 'normal'))
+                    command = root.destroy,
+                    font = ('Avenir', 15, 'normal'))
         self.Exit.grid(row = 8, column = 0, columnspan = 8,
-                       padx = 10, pady = 5, sticky =  N+S+E+W)
+                    padx = 10, pady = 5, sticky =  N+S+E+W)
 
         #Credits
         self.Credits = Label(root, text = 'Raymond Wang 2018 ®',
-                             font = ('Avenir', 15, 'italic'))
-        self.Credits.grid(row = 9, column = 0, columnspan = 8, pady = 5, padx = 5)
+                       font = ('Avenir', 15, 'italic'))
+        self.Credits.grid(row = 9, column = 0,
+                          columnspan = 8, pady = 5, padx = 5)
 
     #FUNCTIONS
     #Clear command
@@ -167,6 +173,8 @@ class Calculator:
                     self.condition(year, month, day, '29', '') 
                 else:
                     self.condition(year, month, day, '28', '29')
+            elif int(month) > 12:
+                self.error_display('Enter month between 1-12 or month name')
         except:
             self.error_display('Enter month between 1-12 or month name')
             
@@ -174,11 +182,15 @@ class Calculator:
     def condition(self, year, month, day, lastday, leapday):
         try:
             if len(day) == 0 or int(day) > int(lastday):
-                self.error_display('Enter day between 1-' + lastday)
+                if int(month) == 2:
+                    if day == leapday:
+                        self.error_display('Not a leap year')
+                    else:                   
+                        self.error_display('Enter day between 1-' + lastday)
+                else:
+                    self.error_display('Enter day between 1-' + lastday)
             elif int(day) <= int(lastday):
                 self.change_display(self.message(year, month, day))
-            elif day == leapday:
-                self.error_display('Not a leap year')
         except:
             self.error_display('Enter day between 1-' + lastday)
             
@@ -258,8 +270,7 @@ class Calculator:
         monthname = [word for word in self.months if word.istitle()]
         Month = int(month) -1
         return monthname[Month]
-        
-
+    
 root = Tk()
 Calculator(root)
 root.mainloop()
