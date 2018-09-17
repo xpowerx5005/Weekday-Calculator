@@ -56,3 +56,6 @@ Programmet börjar med att skapa ett bankobjekt. Bankobjektet innehåller en lis
 1. Om användaren väljer att överföra pengar så körs metoden transaction med den data som matats in. Om datan uppfyllde kraven (Det finns tillräckligt med pengar på kontot och mottagarens kontonummer existerar i databasen) så genomförs transaktionen.
 2. Om användaren väljer att visa historik så visas det kontots transaktionshistorik på skärmen och därefter återvänder användaren till huvudmenyn.
 3. Om användaren väljer att avsluta så avslutas programmet.
+```
+ewu
+```
