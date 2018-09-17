@@ -60,12 +60,12 @@ Programmet börjar med att skapa ett bankobjekt. Bankobjektet innehåller en lis
 # DD1331-P-ppgift
 # Specifikation
 
-# Inledning
+## Inledning
 Jag tänker skapanett Pythonprogram som frågar efter årtal (yyyy), månad (mm) och dag (dd) och därefter, med hjälp av lämpliga formler räkna ut vilken veckodag detta datum infaller eller inföll på. Själva beräkningen ska göras i en funktion som tar år, månad och dag som parametrar. Formlerna ger såklart veckodagen som heltal, men funktionen bör returnera veckodag i klartext.
 
 Programmet kommer köras som en GUI med inmatningsfält för år, månad, respektive dag samt fält för utmatning av veckodag. En av de största utmaningarna med detta projekt är först och främst att finna en lämplig formel för beräkningen, men även felhantering, då datum måste vara korrekt skrivna och inget annat än positiva heltal eller månadsnamnen får förekomma
 
-# Användarscenarier
+## Användarscenarier
 Mata in årtal, månad och dag enligt formaten (yyyy), (mm) eller månadsnamn, (dd). Om det inmatade datumet infaller med dagens datum kommer följande exempelvis skrivas ut:
 ```
 Today is a Monday
@@ -83,7 +83,7 @@ June 21st, 2020 will be a Sunday
 En anmärkning är att meningen som skrivs ut bör förhålla sig enligt korrekt engelsk ortografi. Ordningstalets suffix (Ordinal indicator) ska skrivas ut efter datumet om det inföll innan eller infaller efter dagens datum. I allmäna fall ska utmatningen enligt formatet
 [Month] [day+ suffix], [year] [was a/will be a] [weekday]. 
 
-## Felhantering
+### Felhantering
 Under inmatningen ska programmet först kontrollera om inmatningen av datum är korrekt. Därför bör nedanstående punkter tas i hänsyn.
 * Existerar datum? T ex 30/2 och 12/13 existerar inte.
 * Om blankt inmatas bör detta också kunna hanteras
