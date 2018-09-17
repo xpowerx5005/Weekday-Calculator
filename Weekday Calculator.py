@@ -19,7 +19,7 @@ class Calculator:
                        'November', 'november',
                        'December', 'december']
         master.title('Weekday Calculator')
-        master.geometry('405x360')
+        master.geometry('410x380')
         master.resizable(width = False, height = False)
        
         #Title
@@ -31,8 +31,8 @@ class Calculator:
         #Description
         self.Description = Label(root,
         text= 'This program determines the specific weekday'
-              'for given dates \n'
-              ' | Year (yyyy) | Month (mm) | Day (dd) |',
+              ' for given dates \n'
+              '| Year (yyyy) | Month (mm) | Day (dd) |',
         font = ('Avenir', 13, 'normal'))
         self.Description.grid(row = 1, column = 0,
                      columnspan = 7, padx = 5, pady = 5)
@@ -62,32 +62,36 @@ class Calculator:
         self.Weekdaydisplay = Entry(root, width = 33,
                               state = 'readonly')
         self.Weekdaydisplay.grid(row = 5, column = 1, sticky = E)
+        
+        self.Extradisplay = Entry(root, width = 33,
+                            state = 'readonly')
+        self.Extradisplay.grid(row = 6, column = 1, sticky = E)
 
         #Calculate Button
         self.Calculate = Button(text = 'Calculate',
                          command = self.calculate, 
                          font = ('Avenir', 15, 'normal'))
-        self.Calculate.grid(row = 6, column = 0, columnspan = 8,
+        self.Calculate.grid(row = 7, column = 0, columnspan = 8,
                          padx = 10, pady = 5, sticky =  N+S+E+W)
 
         #Clear Button
         self.clear = Button(text = 'Clear',
                      command = self.clear,
                      font = ('Avenir', 15, 'normal'))
-        self.clear.grid(row = 7, column = 0, columnspan = 8,
+        self.clear.grid(row = 8, column = 0, columnspan = 8,
                     padx = 10, pady = 5, sticky =  N+S+E+W)
 
         #Exit Button
         self.Exit = Button(text = 'Exit',
                     command = root.destroy,
                     font = ('Avenir', 15, 'normal'))
-        self.Exit.grid(row = 8, column = 0, columnspan = 8,
+        self.Exit.grid(row = 9, column = 0, columnspan = 8,
                     padx = 10, pady = 5, sticky =  N+S+E+W)
 
         #Credits
         self.Credits = Label(root, text = 'Raymond Wang 2018 ®',
                        font = ('Avenir', 15, 'italic'))
-        self.Credits.grid(row = 9, column = 0,
+        self.Credits.grid(row = 10, column = 0,
                           columnspan = 8, pady = 5, padx = 5)
 
     #FUNCTIONS
@@ -96,9 +100,13 @@ class Calculator:
         self.Yeardisplay.delete(0,END)
         self.Monthdisplay.delete(0,END)
         self.Daydisplay.delete(0,END)
-        self.Weekdaydisplay.configure(state='normal')
-        self.Weekdaydisplay.delete(0, END)
-        self.Weekdaydisplay.configure(state='readonly')
+        self.clear_message(self.Weekdaydisplay)
+        self.clear_message(self.Extradisplay) 
+    
+    def clear_message(self, func):
+        func.configure(state='normal')
+        func.delete(0, END)
+        func.configure(state='readonly')
         
     #Calculate command
     def calculate(self):
@@ -109,9 +117,9 @@ class Calculator:
         if year.isdigit():
             if year[0] == '0':
                 if len(year) == 1:
-                    self.error_display('Year 0 does not exist')
+                    self.error_display(self.Extradisplay, 'Year 0 does not exist')
                 else:
-                    self.error_display('Remove preceding zeros')     
+                    self.error_display(self.Extradisplay, 'Remove preceding zeros')     
             elif month.isdigit():
                 self.month_digit(year, month, day)                   
             elif month in self.months:
@@ -121,25 +129,26 @@ class Calculator:
                 'July':7, 'August':8, 'September':9,
                 'October':10, 'November':11, 'December':12}
                 Month = str(month_to_int[month])
-                self.month_digit(year, Month, day)            
+                self.month_digit(year, Month, day)
+                
             else:
                 self.output(year, month, day.lstrip('0'))               
         elif len(year) == 0:
             if len(month) == 0:
                 if len(day) == 0:
-                    self.error_display('')
+                    self.error_display(self.Extradisplay, '')
                 else:
-                    self.error_display('Error')
+                    self.error_display(self.Extradisplay, 'Error')
             else:
-                self.error_display('Error')
+                self.error_display(self.Extradisplay, 'Error')
         else:
-            self.error_display('Error')
+            self.error_display(self.Extradisplay, 'Error')
             
     #Error handling regarding preceding zeros for day input
     def month_digit(self, year, month, day):
         if month[0] == '0':
             if len(month) > 2:
-                self.error_display('Remove preceding zeros')
+                self.error_display(self.Extradisplay, 'Remove preceding zeros')
             else:
                 self.day_digit(year, int(month), day)
         else:
@@ -170,13 +179,22 @@ class Calculator:
                 if (((int(year) % 4) == 0 and
                 not (int(year) % 100) == 0)
                 or (int(year) % 400) == 0):
-                    self.condition(year, month, day, '29', '') 
+                    if int(year) == 1712:
+                        if int(day) == 30:
+                            #Easter Egg
+                            self.condition(year, month, day, '30', '')
+                            self.change_display(self.Extradisplay,
+                            '1712/02/30 was a real date in Sweden')
+                        else:
+                            self.condition(year, month, day, '29', '') 
+                    else:
+                        self.condition(year, month, day, '29', '')
                 else:
                     self.condition(year, month, day, '28', '29')
             elif int(month) > 12:
-                self.error_display('Enter month between 1-12 or month name')
+                self.error_display(self.Extradisplay, 'Enter month between 1-12 or month name')
         except:
-            self.error_display('Enter month between 1-12 or month name')
+            self.error_display(self.Extradisplay, 'Enter month between 1-12 or month name')
             
     #Error handling for day
     def condition(self, year, month, day, lastday, leapday):
@@ -184,26 +202,26 @@ class Calculator:
             if len(day) == 0 or int(day) > int(lastday):
                 if int(month) == 2:
                     if day == leapday:
-                        self.error_display('Not a leap year')
+                        self.error_display(self.Extraisplay, 'Not a leap year')
                     else:                   
-                        self.error_display('Enter day between 1-' + lastday)
+                        self.error_display(self.Extradisplay, 'Enter day between 1-' + lastday)
                 else:
-                    self.error_display('Enter day between 1-' + lastday)
+                    self.error_display(self.Extradisplay, 'Enter day between 1-' + lastday)
             elif int(day) <= int(lastday):
-                self.change_display(self.message(year, month, day))
+                self.change_display(self.Weekdaydisplay, self.message(year, month, day))
         except:
-            self.error_display('Enter day between 1-' + lastday)
+            self.error_display(self.Extradisplay, 'Enter day between 1-' + lastday)
             
     #Displays given weekday on the 'Weekday' entry box
-    def change_display(self, text):
-        self.Weekdaydisplay.configure(state='normal')
-        self.Weekdaydisplay.delete(0,END)
-        self.Weekdaydisplay.insert(INSERT, text)
-        self.Weekdaydisplay.configure(state='readonly')
+    def change_display(self, func, text):
+        func.configure(state='normal')
+        func.delete(0,END)
+        func.insert(INSERT, text)
+        func.configure(state='readonly')
      
     #Error output
-    def error_display(self, text):
-        self.change_display(text)
+    def error_display(self, func, text):
+        self.change_display(func, text)
         
     #Returns message for output on entry box
     def message(self, year, month, day): 
